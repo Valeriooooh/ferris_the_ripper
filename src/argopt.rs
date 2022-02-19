@@ -3,7 +3,7 @@ use structopt::StructOpt;
 #[derive(Debug, StructOpt)]
 #[structopt(
     name = "ferris_the_ripper",
-    about = "a sha2 password cracking software."
+    about = "A sha password cracking utility made in rust."
 )]
 pub struct Opt {
     #[structopt(parse(from_os_str))]
@@ -22,7 +22,9 @@ pub struct Opt {
 #[derive(Debug)]
 pub enum Encoding {
     SHA1,
+    SHA224,
     SHA256,
+    SHA384,
     SHA512,
 }
 
@@ -33,11 +35,15 @@ impl FromStr for Encoding {
         match day {
             "sha1" => Ok(Encoding::SHA1),
             "1" => Ok(Encoding::SHA1),
+            "sha224" => Ok(Encoding::SHA224),
+            "224" => Ok(Encoding::SHA224),
             "sha256" => Ok(Encoding::SHA256),
             "256" => Ok(Encoding::SHA256),
+            "sha384" => Ok(Encoding::SHA384),
+            "384" => Ok(Encoding::SHA384),
             "sha512" => Ok(Encoding::SHA512),
             "512" => Ok(Encoding::SHA512),
-            _ => Ok(Encoding::SHA1),
+            _ => Ok(Encoding::SHA256),
         }
     }
 }
